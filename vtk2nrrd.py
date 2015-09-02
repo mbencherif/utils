@@ -20,7 +20,7 @@ def getLines(filename):
     f.close()
     return files
 
-def run(dirlist):
+def run(dirlist, verbose = False):
     dirs = []
     if os.path.isfile(dirlist):
         dirs = getLines(dirlist)
@@ -31,17 +31,20 @@ def run(dirlist):
 
     for adir in dirs:
         filelist = getFilelist(os.path.join(adir, '*.vtk'))
+        if len(filelist)<1:
+            print('WARNING: image not found in ' + adir)
         for afile in filelist:
             (root, ext) = os.path.splitext(afile)
             new_filename = root + '.nrrd'
-            print('*************')
-            print(afile)
-            print(new_filename)
+            if verbose:
+                print('*************')
+                print(afile)
+                print(new_filename)
             
             cvt_command = '/home/rp14/libraries/teem-build/bin/unu save -f nrrd -e gzip -i ' + afile + ' -o ' + new_filename
             return_code = subprocess.call(cvt_command, shell=True)
 
 if __name__ == '__main__':
-    run('/montana-storage/shared/data/cardiac/segmentation/LV_Pablos/dirlist.txt')
-    # run('/montana-storage/shared/data/cardiac/segmentation/LV_Pablos/EVS001')
+    # run('/montana-storage/shared/data/cardiac/segmentation/LV_Pablos/dirlist.txt', True)
+    run('/home/rp14/projects/data/SegmentationData/dirlist.txt', True)
 
