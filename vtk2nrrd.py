@@ -45,6 +45,5 @@ def run(dirlist, verbose = False):
             return_code = subprocess.call(cvt_command, shell=True)
 
 if __name__ == '__main__':
-    # run('/montana-storage/shared/data/cardiac/segmentation/LV_Pablos/dirlist.txt', True)
-    run('/home/rp14/projects/data/SegmentationData/dirlist.txt', True)
+    run('/montana-storage/shared/data/cardiac/segmentation/LV_PablosV3/dirlist.txt', False)
 

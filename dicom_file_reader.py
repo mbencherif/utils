@@ -75,18 +75,39 @@ def readDICOMProperties(volume_name):
         filename = files[file_index]
         
         dcm = dicom.read_file(filename)
-        # print(dcm)
-        
+        print(dcm)
+        # raise
+
+        print('*********************')
+        print('*********************')
         if 'PixelData' in dcm:
             img = dcm.pixel_array #int16
             #img = img.astype('float32')
         else:
             print('PixelData: False')
 
-        if 'SOPClassUID' in dcm:
-            print(dcm.SOPClassUID)
+        # print('*********************')
+        # if 'SOPClassUID' in dcm:
+        #     print(dcm.SOPClassUID)
+        # else:
+        #     print('SOPClassUID: False')
+
+        print('*********************')
+        if 'SOPInstanceUID' in dcm:
+            print(dcm['SOPInstanceUID'])
+            print(dcm.data_element('SOPInstanceUID'))
         else:
-            print('SOPClassUID: False')
+            print('SOPInstanceUID: False')
+
+        # print('*********************')
+        # x = dcm[8, 18].value
+        # print(x)
+            
+        # print('*********************')
+        # if '1.2.276.0.7230010.3.1.4.4126930372.1156.1437671192.5573' in dcm:
+        #     print(dcm['1.2.276.0.7230010.3.1.4.4126930372.1156.1437671192.5573'])
+        # else:
+        #     print('1.2.276.0.7230010.3.1.4.4126930372.1156.1437671192.5573: False')
         
 
         # # Read/display DCM properties
